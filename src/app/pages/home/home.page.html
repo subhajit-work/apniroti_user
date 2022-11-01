@@ -1,0 +1,14 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+  <div>
+    <h3>{{userInfo.displayName}}</h3>
+    <p>{{userInfo.email}}</p>
+    <button ion-button clear (click)="logout()">Logout</button>
+  </div>
+</ion-content>
+<ion-footer>
+    <button ion-button block (click)="loginWithGP()">Login with Google+</button>
+  
+</ion-footer>

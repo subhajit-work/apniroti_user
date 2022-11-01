@@ -1,0 +1,54 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-header class="page-sub-header">
+  <ion-toolbar class="sub-header-bg">
+    <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-label>{{viewData?.name}}</ion-label>
+    <ion-label *ngIf="viewLoadData">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-page bg-animated">
+    <div class="page-underpart">
+      <div class="cms">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="auto">
+              <div class="cms-image" *ngIf="viewData?.image">
+                <img src="{{file_url}}/{{viewData?.image}}" alt="image">
+              </div>
+              <p innerHTML="{{viewData?.description}}"></p>
+            </ion-col>
+          </ion-row>
+
+          <!-- skeleton loading-->
+          <ion-row *ngFor="let item of skeleton">
+            <ion-col *ngIf="viewLoadData">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="this.terms_page == 'member' || this.terms_page == 'volunteer'">
+            <ion-col size-xs="12" size-sm="12" size-sm="6" offset-sm="3" style="padding: 0px;">
+                <ion-button 
+                class="submit-btn"
+                type="submit"
+                routerLink="/become-a-{{this.terms_page}}"
+                expand="block">
+                Become a {{this.terms_page}} Now
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+    </div>
+
+</ion-content>
+<ion-footer *ngIf="this.terms_page == 'member' || this.terms_page == 'volunteer'" class="body-footer"></ion-footer>

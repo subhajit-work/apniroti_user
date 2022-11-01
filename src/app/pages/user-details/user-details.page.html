@@ -1,0 +1,193 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-header class="page-sub-header">
+  <ion-toolbar class="sub-header-bg">
+    <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-label *ngIf="!viewLoadData && pageData?.user_type == '4'">Member Details</ion-label>
+    <ion-label *ngIf="!viewLoadData && pageData?.user_type !== '4'">Volunteer Details</ion-label>
+    <ion-label *ngIf="viewLoadData"><ion-skeleton-text animated></ion-skeleton-text></ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="main-page bg-animated">
+      <div class="page-underpart">
+        <div class="profile-details">
+          <div class="profile-box">
+            <ion-grid>
+              <ion-row>
+                <div class="profile_img">
+                  <div class="profile_img_underpart">
+                    <img *ngIf="pageData?.image" src="{{file_url}}/{{pageData?.image}}" />
+                    <img *ngIf="!pageData?.image" src="./assets/images/noimage.jpg">
+                  </div>
+                  <p>{{pageData?.fname}} {{pageData?.lname}}</p>
+                  <!-- skeleton loading-->
+                  <p *ngIf="viewLoadData"><ion-skeleton-text animated></ion-skeleton-text></p>
+                </div>
+              </ion-row>
+              <ion-row>
+                  <!-- Username -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.username">
+                    <div class="view-element">
+                      <i class="satellite material-icons">account_circle</i>
+                      <span class="text-name-bold">Member ID :</span>
+                      <span><b>{{pageData?.username}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- Gender -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.gender_name">
+                    <div class="view-element">
+                      <i class="wc material-icons">wc</i> 
+                      <span class="text-name-bold">Gender :</span>
+                      <span><b>{{pageData?.gender_name}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- Date of Birth -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.dob">
+                    <div class="view-element">
+                      <i class="date_range material-icons">date_range</i> 
+                      <span class="text-name-bold">Date of Birth :</span>
+                      <span><b>{{pageData?.dob | date:'dd MMM yyy'}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- Father/Husband Name -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.father_name">
+                    <div class="view-element">
+                      <i class="wc material-icons">supervised_user_circle</i>
+                      <span class="text-name-bold">Father/Husband Name :</span>
+                      <span><b>{{pageData?.father_name}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- Mobile -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.mobile">
+                    <div class="view-element">
+                      <i class="smartphone material-icons">smartphone</i>
+                      <span class="text-name-bold">Mobile :</span>
+                      <span><b>{{pageData?.mobile}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- Email -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.email">
+                    <div class="view-element">
+                      <i class="email material-icons">email</i> 
+                      <span class="text-name-bold">Email :</span>
+                      <span><b>{{pageData?.email}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- adhar_no -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.adhar_no">
+                    <div class="view-element">
+                      <i class="near_me material-icons">card_membership</i> 
+                      <span class="text-name-bold">Aadhar/Passport No:</span>
+                      <span><b>{{pageData?.adhar_no}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- Residental Address -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.address_1">
+                    <div class="view-element">
+                      <i class="home material-icons">home</i> 
+                      <span class="text-name-bold">Residental Address :</span>
+                      <span><b>{{pageData?.address_1}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- Office Address -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.address_2">
+                    <div class="view-element">
+                      <i class="home material-icons">account_balance</i> 
+                      <span class="text-name-bold">Office Address :</span>
+                      <span><b>{{pageData?.address_2}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- Country -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.country">
+                    <div class="view-element">
+                      <i class="near_me material-icons">near_me</i> 
+                      <span class="text-name-bold">Country :</span>
+                      <span><b>{{pageData?.country}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- State -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.state">
+                    <div class="view-element">
+                      <i class="satellite material-icons">satellite</i> 
+                      <span class="text-name-bold">State :</span>
+                      <span><b>{{pageData?.state}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- City -->
+                  <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.city">
+                    <div class="view-element">
+                      <i class="near_me material-icons">near_me</i> 
+                      <span class="text-name-bold">City :</span>
+                      <span><b>{{pageData?.city}}</b></span>
+                    </div>
+                  </ion-col>
+                  <!-- pin -->
+                  <!-- <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.pin">
+                    <div class="view-element">
+                      <i class="near_me material-icons">near_me</i> 
+                      <span class="text-name-bold">Pin :</span>
+                      <span><b>{{pageData?.pin}}</b></span>
+                    </div>
+                  </ion-col> -->
+                  <!-- Nationality -->
+                <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.nationality">
+                  <div class="view-element">
+                    <i class="outlined_flag material-icons">outlined_flag</i> 
+                    <span class="text-name-bold">Nationality :</span>
+                    <span><b>{{pageData?.nationality}}</b></span>
+                  </div>
+                </ion-col>
+                <!-- Religion -->
+                <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.religion">
+                  <div class="view-element">
+                    <i class="satellite material-icons">how_to_reg</i> 
+                    <span class="text-name-bold">Religion :</span>
+                    <span><b>{{pageData?.religion}}</b></span>
+                  </div>
+                </ion-col>
+                <!-- occupation -->
+                <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.occupation">
+                  <div class="view-element">
+                    <i class="home material-icons">business_center</i> 
+                    <span class="text-name-bold">Occupation :</span>
+                    <span><b>{{pageData?.occupation}}</b></span>
+                  </div>
+                </ion-col>
+
+                <!-- How do you know about us? -->
+                <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.came_to_know">
+                  <div class="view-element">
+                    <i class="smartphone material-icons">contact_support</i> 
+                    <span class="text-name-bold">How do you know about us? :</span>
+                    <span><b>{{pageData?.came_to_know_name?.name}}</b></span>
+                  </div>
+                </ion-col>
+
+                <!-- Referred_By -->
+                <ion-col size-xs="12" size-sm="6" *ngIf="pageData?.referred_by">
+                  <div class="view-element">
+                    <i class="wc material-icons">share</i> 
+                    <span class="text-name-bold">Referred By :</span>
+                    <span><b>{{pageData?.referred_by}}</b></span>
+                  </div>
+                </ion-col>
+                
+              </ion-row>
+              <!-- skeleton loading-->
+              <ion-row *ngIf="viewLoadData">
+                <ion-col *ngFor="let item of skeleton" size-xs="12" size-sm="6" >
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "apniRoti",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

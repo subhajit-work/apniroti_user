@@ -1,0 +1,162 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-header class="page-sub-header">
+  <ion-toolbar class="sub-header-bg">
+    <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-label>Donate Us</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="main-page bg-animated">
+      <div class="page-underpart">
+        <div class="become-a-member">
+          <form #userAddForm="ngForm" (ngSubmit)="onSubmit(userAddForm)" (keyup.enter)="onSubmit(userAddForm)">
+              <div class="middle-section">
+                  <ion-grid>
+                      <ion-row style="margin-bottom:40px;">
+                        <ion-col size-xs="12" size-sm="6" offset-sm="3">
+                          <ion-list>
+                            <!-- First Name -->
+                            <ion-item>
+                                <ion-label position="floating">First Name<sup>*</sup></ion-label>
+                                <ion-input 
+                                    type="text"
+                                    [(ngModel)]="model.fname"
+                                    name="fname"
+                                    required
+                                    clearInput>
+                                </ion-input>
+                            </ion-item>
+                            <!-- Last Name -->
+                            <ion-item>
+                                <ion-label position="floating">Last Name</ion-label>
+                                <ion-input 
+                                    type="text"
+                                    [(ngModel)]="model.lname"
+                                    name="lname"
+                                    clearInput>
+                                </ion-input>
+                            </ion-item>
+                            <!-- Mobile -->
+                            <ion-item>
+                                <ion-label position="floating">Mobile<sup>*</sup></ion-label>
+                                <ion-input 
+                                    type="tel"
+                                    OnlyNumber="true" 
+                                    minlength="10"
+                                    maxlength="10"
+                                    [(ngModel)]="model.mobile"
+                                    name="mobile"
+                                    required
+                                    clearInput>
+                                </ion-input>
+                            </ion-item>
+                            <!-- Email -->
+                            <ion-item>
+                                <ion-label position="floating">Email<sup>*</sup></ion-label>
+                                <ion-input 
+                                    type="email"
+                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" 
+                                    email
+                                    [(ngModel)]="model.email"
+                                    name="email"
+                                    required
+                                    #emailCtrl="ngModel"
+                                    clearInput>
+                                </ion-input>
+                            </ion-item>
+                            <!-- Residential  Address -->
+                            <ion-item>
+                                <ion-label position="floating">Residential Address</ion-label>
+                                <ion-textarea auto-grow="true" name="address_1" [(ngModel)]="model.address_1" clearInput></ion-textarea>
+                            </ion-item>
+
+                            <!-- came_to_know -->
+                            <ion-item>
+                                <ion-label  position="floating">How do you know about us?</ion-label>
+                                <ionic-selectable
+                                [(ngModel)]="model.came_to_know"
+                                [items]="cameToKnowList"
+                                itemValueField="id"
+                                itemTextField="name"
+                                [canSearch]="true"
+                                [canClear]="true"
+                                [isMultiple]="false"
+                                [ngModelOptions]="{standalone: true}">
+                                </ionic-selectable>
+                                <input *ngIf="model?.came_to_know" type="hidden" name="came_to_know" [(ngModel)]="model.came_to_know.id">
+                            </ion-item>
+
+                            <!-- Referred_By -->
+                            <ion-item>
+                                <ion-label position="floating">Referred By</ion-label>
+                                <ion-input 
+                                    type="text"
+                                    [(ngModel)]="model.referred_by"
+                                    name="referred_by"
+                                    clearInput>
+                                </ion-input>
+                            </ion-item>
+                            
+                            <!-- Price -->
+                            <ion-item>
+                                <ion-label position="floating">Amount<sup>*</sup> (&#8377;)</ion-label>
+                                <ion-input 
+                                    type="tel"
+                                    OnlyNumber="true"
+                                    maxlength="21"
+                                    [(ngModel)]="model.price"
+                                    name="price"
+                                    (input)="onSearchChange($event.target.value)"
+                                    required
+                                    clearInput>
+                                </ion-input>
+                            </ion-item>
+
+
+                            <h5  *ngIf="this.model.smile > 0" style="text-align: center;">You are going to spread {{this.model.smile | round}} smiles.</h5>
+
+                            <!-- hidden Data-->
+                            <input type="hidden" name="site_api" [(ngModel)]="main_url">
+                            <input type="hidden" name="identifier" [(ngModel)]="model.identifier">
+                            
+                            <input type="hidden" name="approve" [(ngModel)]="model.approve">
+                            <input type="hidden" [(ngModel)]="model.username" name="username">
+                            <input type="hidden" [(ngModel)]="model.password" name="password">
+                            <input type="hidden" [(ngModel)]="model.gender" name="gender">
+                            <input type="hidden" [(ngModel)]="model.dob" name="dob">
+                            <input type="hidden" [(ngModel)]="model.fname" name="fname">
+                            <input type="hidden" [(ngModel)]="model.address_2" name="address_2">
+                            <!-- <input type="hidden" [(ngModel)]="model.pin" name="pin"> -->
+                            <input type="hidden" [(ngModel)]="model.nationality" name="nationality">
+                            <input type="hidden" [(ngModel)]="model.religion" name="religion">
+                            <input type="hidden" [(ngModel)]="model.adhar_no" name="adhar_no">
+                            <input type="hidden" [(ngModel)]="model.occupation" name="occupation">
+
+                          </ion-list>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col size-xs="12" size-sm="6" offset-sm="3" style="padding: 0px;">
+                              <ion-button 
+                              class="submit-btn"
+                              type="submit" 
+                              expand="block"
+                              [disabled]="!userAddForm.valid">
+                              <ion-spinner name="crescent" *ngIf="form_submit_text == 'Donating'"></ion-spinner> 
+                              <span class="submitText">{{form_submit_text}}</span>
+                              </ion-button>
+                          </ion-col>
+                      </ion-row>
+                  </ion-grid>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</ion-content>
+<ion-footer class="body-footer"></ion-footer>

@@ -1,0 +1,29 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-header class="page-sub-header">
+  <ion-toolbar class="sub-header-bg">
+    <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-label>Vehicle Tracker</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-page bg-animated">
+    <div class="page-underpart">
+      <div class="cms">
+        
+              <div class="show-map">
+                <!-- map AIzaSyASLxZxLdxeh82ngWm0Wa82XNunV-Y_TOc -->
+                <div #map id="map">
+                  <ion-spinner *ngIf="viewLoadData"  style="height: inherit; position: relative; left: 46%;" name="crescent"></ion-spinner>
+                </div>
+              </div>
+            
+      </div>
+    </div>
+    </div>
+
+</ion-content>

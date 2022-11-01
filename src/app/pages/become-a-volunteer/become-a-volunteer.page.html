@@ -1,0 +1,256 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-header class="page-sub-header">
+  <ion-toolbar class="sub-header-bg">
+    <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-label>Become a volunteer</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-page bg-animated">
+    <div class="page-underpart">
+      <div class="become-a-member">
+        <form #userAddForm="ngForm" (ngSubmit)="onSubmit(userAddForm)" (keyup.enter)="onSubmit(userAddForm)">
+            <div class="middle-section">
+                <ion-grid>
+                    <ion-row style="margin-bottom:40px;">
+                        <ion-col class="ion-text-center" *ngIf="get_user_dtls?.is_volunteer == 1" size-xs="12" size-sm="6" offset-sm="3">
+                            <h4>You are already a volunteer. You can renew your volunteership here.</h4>
+                        </ion-col>
+                      <ion-col size-xs="12" size-sm="6" offset-sm="3">
+                        <ion-list>
+                          <!-- First Name -->
+                          <ion-item>
+                              <ion-label position="floating">First Name<sup>*</sup></ion-label>
+                              <ion-input 
+                                  type="text"
+                                  [(ngModel)]="model.fname"
+                                  name="fname"
+                                  required
+                                  clearInput>
+                              </ion-input>
+                          </ion-item>
+                          <!-- Last Name -->
+                          <ion-item>
+                              <ion-label position="floating">Last Name</ion-label>
+                              <ion-input 
+                                  type="text"
+                                  [(ngModel)]="model.lname"
+                                  name="lname"
+                                  clearInput>
+                              </ion-input>
+                          </ion-item>
+                          <!-- Gender -->
+                          <ion-item>
+                            <ion-label position="floating">Gender </ion-label>
+                            <ion-list class="radio-btn-list">
+                              <div class="radio-item" *ngFor="let item of genderArry; let i = index;">
+                                  <!-- gender >>  {{item.gender}} -->
+                                  <input type="radio" id="ritema{{i}}" [value]="item?.value" name="gender" [(ngModel)]="item.gender" (ngModelChange)="radioButtonChange(item.gender)">
+                                  <label for="ritema{{i}}">{{item?.name}}</label>
+                              </div>
+                            </ion-list>
+                          </ion-item>
+                          <!-- D.O.B -->
+                          <ion-item>
+                            <ion-label position="floating">Date of Birth</ion-label>
+                            <ion-datetime 
+                              mode="ios"
+                              display-format="DD/MM/YYYY"
+                              [(ngModel)]="model.dob"
+                              (ngModelChange)="pickDate(model.dob, 'startDate')"
+                              [ngModelOptions]="{standalone: true}"
+                              >
+                            </ion-datetime>
+
+                            <!-- clear buttm -->
+                            <ion-icon *ngIf="model.dob" name="ios-close-circle-outline" class="custom-clear" (click)="clearItem('dob', model.dob)"></ion-icon>
+
+                            <!-- hidden  date time input -->
+                            <input type="hidden" name="dob" [(ngModel)]="model.dob">
+                          </ion-item>
+                          <!-- Father Name -->
+                          <ion-item>
+                            <ion-label position="floating">Father/Husband's Name</ion-label>
+                            <ion-input 
+                                type="text"
+                                [(ngModel)]="model.father_name"
+                                name="father_name"
+                                clearInput>
+                            </ion-input>
+                          </ion-item>
+                          <!-- Mobile -->
+                          <ion-item>
+                              <ion-label position="floating">Mobile<sup>*</sup></ion-label>
+                              <ion-input 
+                                  type="tel"
+                                  OnlyNumber="true" 
+                                  minlength="10"
+                                  maxlength="10"
+                                  [(ngModel)]="model.mobile"
+                                  name="mobile"
+                                  required
+                                  clearInput>
+                              </ion-input>
+                          </ion-item>
+                          <!-- Email -->
+                          <ion-item>
+                              <ion-label position="floating">Email<sup>*</sup></ion-label>
+                              <ion-input 
+                                  type="email"
+                                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" 
+                                  email
+                                  [(ngModel)]="model.email"
+                                  name="email"
+                                  required
+                                  #emailCtrl="ngModel"
+                                  clearInput>
+                              </ion-input>
+                          </ion-item>
+                          <!-- Residential  Address -->
+                          <ion-item>
+                              <ion-label position="floating">Residential Address</ion-label>
+                              <ion-textarea auto-grow="true" name="address_1" [(ngModel)]="model.address_1" clearInput></ion-textarea>
+                          </ion-item>
+                          <!-- Office  Address -->
+                          <ion-item>
+                              <ion-label position="floating">Office Address</ion-label>
+                              <ion-textarea auto-grow="true" name="address_2" [(ngModel)]="model.address_2" clearInput></ion-textarea>
+                          </ion-item>
+                          <!-- Pin -->
+                          <!-- <ion-item>
+                              <ion-label position="floating">Pin</ion-label>
+                              <ion-input 
+                                  type="tel"
+                                  OnlyNumber="true" 
+                                  minlength="6"
+                                  maxlength="6"
+                                  [(ngModel)]="model.pin"
+                                  name="pin"
+                                  clearInput>
+                              </ion-input>
+                          </ion-item> -->
+                          <!-- Nationality -->
+                          <ion-item>
+                              <ion-label position="floating">Nationality</ion-label>
+                              <ion-input 
+                                  type="text"
+                                  [(ngModel)]="model.nationality"
+                                  name="nationality"
+                                  clearInput>
+                              </ion-input>
+                          </ion-item>
+                          <!-- Religion -->
+                          <ion-item>
+                              <ion-label position="floating">Religion</ion-label>
+                              <ion-input 
+                                  type="text"
+                                  [(ngModel)]="model.religion"
+                                  name="religion"
+                                  clearInput>
+                              </ion-input>
+                          </ion-item>
+                          <!-- Aadhar Card No -->
+                          <ion-item>
+                              <ion-label position="floating">Aadhar / Passport No<sup>*</sup></ion-label>
+                              <ion-input 
+                                  type="text"
+                                  [(ngModel)]="model.adhar_no"
+                                  name="adhar_no"
+                                  required
+                                  clearInput>
+                              </ion-input>
+                          </ion-item>
+                          <!-- Occupation -->
+                          <ion-item>
+                              <ion-label position="floating">Occupation</ion-label>
+                              <ion-input 
+                                  type="text"
+                                  [(ngModel)]="model.occupation"
+                                  name="occupation"
+                                  clearInput>
+                              </ion-input>
+                          </ion-item>
+                          <!-- Profile Picture -->
+                          <ion-item>
+                              <div class="file_upload form-item">
+                                  <ion-label position="floating">Profile Picture</ion-label>
+                                  <div class="normal-file-uploading">
+                                      <span class="upload-file profile-upload">
+                                          Upload Picture
+                                          <input [(ngModel)]="model.image2" type="file" (change)="normalFileUpload($event, model.image2, 'image')" placeholder="Upload file" [ngModelOptions]="{standalone: true}" accept="image/*">
+                                      </span>
+                                      <!-- accept=".pdf,.jpg,.doc,.docx" -->
+
+                                      <!-- <span [hidden]="!uploadImagePathShow" class="file-name">{{model.image2}}</span> -->
+                                      <img [hidden]="!uploadImagePathShow " class="form-upload-image" src="{{imgaePreview}}" alt="image" />
+
+                                      <img *ngIf="model.image && !uploadImagePathShow" class="form-upload-image" src="{{file_url}}/{{model.image}}" alt="image" />
+
+                                      <span class="image-clear img" (click)="fileCross(model.image2, 'image')" [hidden]="!model.image && !model.image2">
+                                          <ion-icon name="close"></ion-icon>
+                                      </span>
+                                  </div>
+                              </div>
+                          </ion-item>
+
+                          <!-- came_to_know -->
+                          <ion-item>
+                            <ion-label  position="floating">How do you know about us?</ion-label>
+                            <ionic-selectable
+                              [(ngModel)]="model.came_to_know"
+                              [items]="cameToKnowList"
+                              itemValueField="id"
+                              itemTextField="name"
+                              [canSearch]="true"
+                              [canClear]="true"
+                              [isMultiple]="false"
+                              [ngModelOptions]="{standalone: true}">
+                            </ionic-selectable>
+                            <input *ngIf="model?.came_to_know" type="hidden" name="came_to_know" [(ngModel)]="model.came_to_know.id">
+                          </ion-item>
+
+                          <!-- Referred_By -->
+                          <ion-item>
+                            <ion-label position="floating">Referred By</ion-label>
+                            <ion-input 
+                                type="text"
+                                [(ngModel)]="model.referred_by"
+                                name="referred_by"
+                                clearInput>
+                            </ion-input>
+                          </ion-item>
+
+                          <!-- hidden  data send -->
+                          <input type="hidden" name="approve" [(ngModel)]="model.approve">
+                          <input type="hidden" [(ngModel)]="model.username" name="username">
+                          <input type="hidden" [(ngModel)]="model.password" name="password">
+
+                        </ion-list>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size-xs="12" size-sm="6" offset-sm="3" style="padding: 0px;">
+                            <ion-button 
+                            class="submit-btn"
+                            type="submit" 
+                            expand="block"
+                            [disabled]="!userAddForm.valid">
+                            <ion-spinner name="crescent" *ngIf="form_submit_text == 'Submitting'"></ion-spinner> 
+                            <span *ngIf="get_user_dtls?.is_volunteer == 0" class="submitText">{{form_submit_text}}</span>
+                            <span *ngIf="get_user_dtls?.is_volunteer == 1" class="submitText">Renew</span>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="body-footer"></ion-footer>

@@ -1,0 +1,54 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-header class="page-sub-header">
+  <ion-toolbar class="sub-header-bg">
+    <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-label>No. of smiles spread</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main-page bg-animated">
+    <div class="page-underpart">
+      <div class="no-of-feed">
+          <ion-card>
+            <div class="menu-icon">
+              <i class="fa fa-{{pageData?.icon}}" aria-hidden="true"></i>
+            </div>
+            <!-- skeleton loading-->
+            <ion-thumbnail *ngIf="viewLoadData" style="margin: 0 auto;">
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-thumbnail>
+
+            <ion-card-header>
+              <ion-card-subtitle *ngIf="pageData?.no_of_feeds">No. of smiles spread</ion-card-subtitle>
+              <ion-card-title>{{pageData?.no_of_feeds}}</ion-card-title>
+            </ion-card-header>
+            <!-- skeleton loading-->
+            <ion-card-header style="text-align: -webkit-center;" *ngIf="viewLoadData">
+              <ion-card-subtitle>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </ion-card-subtitle>
+              <ion-card-title>
+                <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+              </ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              {{pageData?.text}}
+            </ion-card-content>
+            <!-- skeleton loading-->
+            <ion-card-content *ngIf="viewLoadData">
+              <ion-skeleton-text animated></ion-skeleton-text>
+              <ion-skeleton-text animated></ion-skeleton-text>
+              <ion-skeleton-text animated></ion-skeleton-text>
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-card-content>
+          </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>

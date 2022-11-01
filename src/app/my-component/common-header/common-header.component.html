@@ -1,0 +1,19 @@
+<ion-header class="app-header page-sub-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-label (click)="goPage('dashboard')">
+        <img alt="logo" src="{{file_url}}/{{get_user_dtls?.siteinfo?.logo}}">
+    </ion-label>
+        
+
+     <!-- loading -->
+    <ion-buttons slot="end" *ngIf="userInfoLoading">
+      <ion-button>
+        <ion-spinner name="crescent" style="width: 20px;" ></ion-spinner>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>

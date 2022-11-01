@@ -1,0 +1,87 @@
+<ion-content class="add-modal interest-add-modal">
+    <ion-item class="common-modal-header">
+        <ion-label>
+           {{heder_title}}
+        </ion-label>
+        <div class="modal-cancel-btn">
+            <a herf="#" (click)="closeModal()"><ion-icon color="dark" ios="ios-close" md="md-close"></ion-icon></a>
+        </div>
+    </ion-item>
+
+    <!-- ================== change password modal ======= -->
+    <ion-grid  *ngIf="this.get_identifier == 'change_password_modal'">
+        <ion-row>
+            <ion-col size="12">
+                <form class="common-modal"  #changePassswordeModalForm="ngForm" (ngSubmit)="onSubmit(changePassswordeModalForm)" [mustMatch]="['new_password', 'confirm_password']" novalidate>
+                    <div class="modal-body">
+                        <!-- for edit -->
+                        <input type="hidden" name="_method" [(ngModel)]="onEditField">
+                        <!-- Deposit Date -->
+                        <div class="change-password-wrapper">
+                            <div class="change-password-inner">
+                                <ion-row>
+                                    <ion-col size="12">
+                                        <div>
+                                            <ion-label position="floating">Old Password <sup>*</sup> </ion-label>
+                                            <div>
+                                                <ion-input type="password" name="old_password" [(ngModel)]="model.old_password" clearInput required>
+                                                </ion-input>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col size="12">
+                                        <div>
+                                            <ion-label position="floating">New Password <sup>*</sup> </ion-label>
+                                            <div>
+                                                <ion-input 
+                                                type="password" 
+                                                name="new_password" 
+                                                [(ngModel)]="model.new_password" 
+                                                #password="ngModel"
+                                                clearInput required>
+                                                </ion-input>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col size="12">
+                                        <div>
+                                            <ion-label position="floating">Confirm Password <sup>*</sup> </ion-label>
+                                            <div>
+                                                <ion-input 
+                                                type="password" 
+                                                name="confirm_password" 
+                                                [(ngModel)]="model.confirm_password" clearInput
+                                                #confirmPassword="ngModel"
+                                                required>
+                                                </ion-input>
+                                                <!-- [ngClass]="{ 'is-invalid': confirmPassword.invalid}" -->
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- submit button -->
+                    <ion-row>
+                        <ion-col class="ion-text-center modal-submit modal-footer" size-xs="12" size-sm="12" size-md="12"  size-lg="12" >
+                            <ion-button color="secondary" size="default"
+                            type="submit" [disabled]="!changePassswordeModalForm.valid" 
+                            color="secondary" tooltip="Save" flow="up">
+                                <ion-spinner *ngIf="form_submit_text == 'Submitting'" name="crescent"></ion-spinner> 
+                                <span class="submitText">{{form_submit_text}}</span>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </form>
+                
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    
+</ion-content>

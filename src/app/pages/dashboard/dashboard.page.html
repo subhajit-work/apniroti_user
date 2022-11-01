@@ -1,0 +1,111 @@
+<!-- common header show -->
+<common-header></common-header>
+
+<ion-content>
+	<div class="main-page bg-animated">
+		<div class="page-underpart">
+			<div class="text-center">
+				<div class="dashboard-page">
+					<ion-grid>
+						<ion-row *ngIf="!viewLoadData">
+
+							<ion-col *ngFor="let item of pageData?.banner_data?.main_banner; let i = index;" size-xs="6" size-sm="4" [ngClass]="{'ion-hide':pageData?.user_type == '4' && item.name == 'Become a Volunteer'}">
+								<div class="menu-single">
+									<div (click)="closeModal()" class="menu-holder" routerLink="/{{item.link1}}">
+										<div class="border" matRipple>
+											<div class="menu-icon">
+												<i class="fa fa-{{item.short_description}}" aria-hidden="true"></i>
+											</div>
+											<div class="menu-text">
+												{{item.name}}
+											</div>
+										</div>
+									</div>
+								</div>
+							</ion-col>
+
+							<!-- gps track start -->
+							<ion-col *ngIf="pageData?.userinfo?.gps_location == '1'" size-xs="6" size-sm="4" >
+								<div class="menu-single" [ngClass]="{'tracking-disabled':gps_button}">
+									<div (click)="startBackgroundGeolocation()" class="menu-holder" >
+										<div class="border" matRipple>
+											<div class="menu-icon">
+												<i class="fa fa-map-marker" aria-hidden="true"></i>
+											</div>
+											<div class="menu-text">
+												<span *ngIf="!gps_button">Track Now</span>
+												<span *ngIf="gps_button">Tracking...</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</ion-col>
+							<!-- gps track start end -->
+
+							<!-- vehicle tracker start -->
+							<ion-col size-xs="6" size-sm="4" *ngIf="get_user_dtls?.banner_data?.main_banner">
+								<div class="menu-single">
+									<div  class="menu-holder" >
+										<div class="border" matRipple routerLink="/vehicle-tracker">
+											<div class="menu-icon">
+												<i class="fa fa-bus" aria-hidden="true"></i>
+											</div>
+											<div class="menu-text">
+												Vehicle Tracker
+											</div>
+										</div>
+									</div>
+								</div>
+							</ion-col>
+							<!-- vehicle tracker end -->
+
+							<!-- barcode scanner start -->
+							<ion-col size-xs="6" size-sm="4" *ngIf="get_user_dtls?.banner_data?.main_banner && get_user_dtls?.siteinfo?.enable_member_scanner == '1'">
+								<div class="menu-single">
+									<div (click)="scanCode()" class="menu-holder" >
+										<div class="border" matRipple>
+											<div class="menu-icon">
+												<i class="fa fa-qrcode" aria-hidden="true"></i>
+											</div>
+											<div class="menu-text">
+												Member Scanner
+											</div>
+										</div>
+									</div>
+								</div>
+							</ion-col>
+							<!-- barcode scanner end -->
+
+							
+
+						</ion-row>
+						<!-- skeleton loading-->
+						<ion-row *ngIf="viewLoadData">
+							<ion-col *ngFor="let item of skeleton" size-xs="6" size-sm="4">
+								<div class="menu-single">
+									<div class="menu-holder">
+										<div class="border" matRipple>
+											<div class="menu-icon">
+												<i class="fa" aria-hidden="true">
+													<ion-skeleton-text animated style="padding: 14px;"></ion-skeleton-text>
+												</i>
+											</div>
+											<div class="menu-text">
+												<ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+												<ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+											</div>
+										</div>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+</ion-content>
+
+<!-- common footer show -->
+<!-- <common-footer></common-footer> -->
